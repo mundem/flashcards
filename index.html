@@ -124,8 +124,8 @@ function draw(){
  const c=deck[ix],ep=st.dir==='ep';
  const front=ep?c.e:c.p,back=ep?c.p:c.e,txt=flip?back:front;
  const note=(ep?!flip:flip)&&c.n?`<span class="note">${esc(c.n)}</span>`:'';
- $('#card').innerHTML=`<div class="lab">${flip?'':esc(c.t)}</div><div class="main${txt.length>40?' long':''}">${esc(txt)}${note}</div><div class="foot"><span>${c.s?'Sentence':'Word/Phrase'}</span><span>${flip?'':'Tap to flip'}</span></div><button class="spk" aria-label="Play audio">🔊</button>`;
- $('#card .spk').onclick=e=>{e.stopPropagation();say(c.h)};
+ $('#card').innerHTML=`<div class="lab">${flip?'':esc(c.t)}</div><div class="main${txt.length>40?' long':''}">${esc(txt)}${note}</div><div class="foot"><span>${c.s?'Sentence':'Word/Phrase'}</span><span>${flip?'':'Tap to flip'}</span></div>${ep===flip?'<button class="spk" aria-label="Play audio">🔊</button>':''}`;
+ const sp=$('#card .spk');if(sp)sp.onclick=e=>{e.stopPropagation();say(c.h)};
  $('#count').textContent=`${ix+1} / ${deck.length}`;$('#msg2').textContent='';
 }
 $('#card').onclick=()=>{flip=!flip;draw()};
